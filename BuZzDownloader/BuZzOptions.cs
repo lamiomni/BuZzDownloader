@@ -30,7 +30,7 @@ namespace BuZzDownloader
                 Console.Write("Login: ");
                 Settings.Default.BuZzLogin = Console.ReadLine();
                 Console.Write("Password: ");
-                Settings.Default.BuZzPwd = Console.ReadLine();
+                Settings.Default.BuZzPwd = PasswordReadline();
                 Settings.Default.Save();
                 Console.WriteLine("Credentials saved");
             }
@@ -44,6 +44,35 @@ namespace BuZzDownloader
             // Ignore HTTPS certificate error and set protocol
             ServicePointManager.ServerCertificateValidationCallback += delegate { return true; };
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+        }
+
+        private static string PasswordReadline()
+        {
+            string pass = string.Empty;
+            ConsoleKeyInfo key;
+
+            do
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                {
+                    pass += key.KeyChar;
+                    Console.Write("*");
+                }
+                else
+                {
+                    if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
+                    {
+                        pass = pass.Substring(0, (pass.Length - 1));
+                        Console.Write("\b \b");
+                    }
+                }
+            }
+            while (key.Key != ConsoleKey.Enter);
+
+            Console.WriteLine();
+            return pass;
         }
 
         public static ICredentials GetCredentials()
