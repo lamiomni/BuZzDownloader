@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BuZzDownloader.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BuZzUrl" Description="BuZz's URL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://buzz.3on.fr/</Value>
+    </Setting>
+    <Setting Name="BuZzLogin" Description="User login" GenerateDefaultValueInCode="false" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BuZzPwd" Description="User password" GenerateDefaultValueInCode="false" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DownloadFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">./Downloads</Value>
+    </Setting>
+    <Setting Name="StatusFrequency" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
