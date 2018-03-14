@@ -40,10 +40,6 @@ namespace BuZzDownloader
             }
 
             Console.WriteLine();
-
-            // Ignore HTTPS certificate error and set protocol
-            ServicePointManager.ServerCertificateValidationCallback += delegate { return true; };
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
         }
 
         private static string PasswordReadline()
