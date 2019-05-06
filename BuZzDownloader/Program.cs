@@ -29,16 +29,17 @@ namespace BuZzDownloader
                 using (var client = new WebClient {Credentials = BuZzOptions.GetCredentials()})
                 {
                     if (!buZzOptions.SkipListDownload)
-                    {
                         client.DownloadFile(buZzOptions.BasketUrl, buZzOptions.BasketLocalFile);
-                    }
 
                     string[] toDownload = File.ReadAllLines(buZzOptions.BasketLocalFile);
 
                     foreach (var url in toDownload)
-                    {
                         BuZzOptions.DownloadFile(url, client);
-                    }
+
+					var basketFolder = Path.Combine(buZzOptions.BasketLocalDir, "basket");
+
+					File.Delete(buZzOptions.BasketLocalFile);
+					Directory.Delete(basketFolder, true);
                 }
             }
             catch (Exception e)

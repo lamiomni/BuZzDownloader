@@ -112,14 +112,12 @@ namespace BuZzDownloader
 
             // File system management
             BasketUrl = Settings.Default.BuZzUrl + "basket/list";
-            basketFile = Settings.Default.DownloadFolder + "/basket.list";
+            basketFile = Path.Combine(Settings.Default.DownloadFolder, "basket.list");
             BasketLocalFile = Path.GetFullPath(basketFile);
             BasketLocalDir = Path.GetDirectoryName(basketFile);
 
             if (!Directory.Exists(BasketLocalDir))
-            {
                 Directory.CreateDirectory(BasketLocalDir);
-            }
 
             if (File.Exists(BasketLocalFile))
             {
@@ -127,9 +125,7 @@ namespace BuZzDownloader
                 var input = Console.ReadLine();
 
                 if (input == null || !input.Equals("y", StringComparison.InvariantCultureIgnoreCase))
-                {
                     SkipListDownload = true;
-                }
 
                 Console.WriteLine("{0} list file download...", SkipListDownload ? "Skipping" : "Performing");
                 Console.WriteLine();
@@ -154,14 +150,10 @@ namespace BuZzDownloader
             FileInfo fi = null;
 
             if (!Directory.Exists(fileLocalDir))
-            {
                 Directory.CreateDirectory(fileLocalDir);
-            }
 
             using (Stream s = client.OpenRead(url))
-            {
                 distantSize = long.Parse(client.ResponseHeaders["Content-Length"]);
-            }
 
             // Check size
             if (File.Exists(fileLocalFile))
@@ -184,9 +176,7 @@ namespace BuZzDownloader
             var t = new Timer(o =>
             {
                 if (fi == null)
-                {
                     fi = new FileInfo(fileLocalFile);
-                }
 
                 fi.Refresh();
 
@@ -203,9 +193,7 @@ namespace BuZzDownloader
             t.Change(Timeout.Infinite, Timeout.Infinite);
 
             if (shown)
-            {
                 Console.WriteLine();
-            }
 
             Console.WriteLine("Download complete!");
         }
